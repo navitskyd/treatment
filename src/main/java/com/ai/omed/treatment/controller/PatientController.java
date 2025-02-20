@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import com.ai.omed.treatment.model.Patient;
 import com.ai.omed.treatment.service.PatientService;
-import com.ai.omed.treatment.service.TasksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -50,11 +50,11 @@ public class TasksService {
   @Scheduled(cron = "0 0/5 * * * ?") // Every 5 minutes
   public int generateTreatmentTasksForOneMonth() {
     log.info("create tasks");
-    AtomicInteger totalCount= new AtomicInteger();
+    AtomicInteger totalCount = new AtomicInteger();
     treatmentPlanRepository.findAll()
         .stream()
         .filter(p -> p.getStatus() == TreatmentPlanStatus.ACTIVE)
-        .forEach(p-> totalCount.addAndGet(generateTasksForPlan(p)));
+        .forEach(p -> totalCount.addAndGet(generateTasksForPlan(p)));
     log.info("{} tasks created", totalCount);
     return totalCount.get();
   }
