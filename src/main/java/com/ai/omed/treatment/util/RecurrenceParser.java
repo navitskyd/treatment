@@ -1,6 +1,9 @@
 package com.ai.omed.treatment.util;
-import java.util.*;
-import java.util.regex.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.ai.omed.treatment.model.recurrement.Day;
@@ -14,11 +17,11 @@ import org.springframework.util.StringUtils;
 public class RecurrenceParser {
 
   private static final Pattern RECURRENCE_PATTERN =
-      Pattern.compile("EVERY (.+?) AT (.+)");
+      Pattern.compile("(.+?) AT (.+)");
 
   public static Recurrence parseRecurrence(String recurrencePattern) {
-    if(!StringUtils.hasText(recurrencePattern)){
-      return null;
+    if (!StringUtils.hasText(recurrencePattern)) {
+      throw new IllegalArgumentException("Pattern cannot be null");
     }
     Matcher matcher = RECURRENCE_PATTERN.matcher(recurrencePattern);
     if (!matcher.matches()) {
@@ -63,22 +66,33 @@ public class RecurrenceParser {
   }
 
   public static void main(String[] args) {
-    String input = "EVERY MONDAY AT 08:00";
+    String input = "MONDAY AT 08:00";
     Recurrence recurrence = RecurrenceParser.parseRecurrence(input);
 
-    input = "EVERY MONDAY AND WEDNESDAY AND FRIDAY AT 10:30 AND 16:00";
+    input = "EVERYDAY AT 10:30 AND 16:00";
     recurrence = RecurrenceParser.parseRecurrence(input);
 
-    input = "EVERY TUESDAY AT 09:00 AND 14:45 AND 18:30";
+    input = "WEEKEND AT 10:30 AND 16:00";
+    recurrence = RecurrenceParser.parseRecurrence(input);
+    input = "WORKING_DAY AT 10:30 AND 16:00";
     recurrence = RecurrenceParser.parseRecurrence(input);
 
-    input = "EVERY WEDNESDAY AND FRIDAY AT 09:30 AND 16:00";
+    input = "EVERYDAY AT 10:30 AND 16:00";
     recurrence = RecurrenceParser.parseRecurrence(input);
 
-    input = "EVERY FUNSDAY AT 10:00";
-   // recurrence = RecurrenceParser.parseRecurrence(input);
+    input = "MONDAY AND WEDNESDAY AND FRIDAY AT 10:30 AND 16:00";
+    recurrence = RecurrenceParser.parseRecurrence(input);
 
-    input = "EVERY MONDAY AT 23:59";
+    input = "TUESDAY AT 09:00 AND 14:45 AND 18:30";
+    recurrence = RecurrenceParser.parseRecurrence(input);
+
+    input = "WEDNESDAY AND FRIDAY AT 09:30 AND 16:00";
+    recurrence = RecurrenceParser.parseRecurrence(input);
+
+    input = "FUNSDAY AT 10:00";
+    // recurrence = RecurrenceParser.parseRecurrence(input);
+
+    input = "MONDAY AT 23:59";
     recurrence = RecurrenceParser.parseRecurrence(input);
 
     recurrence = RecurrenceParser.parseRecurrence(null);

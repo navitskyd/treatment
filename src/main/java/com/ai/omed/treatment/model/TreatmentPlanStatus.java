@@ -1,5 +1,5 @@
 package com.ai.omed.treatment.model;
 
-public enum TreatmentTaskStatus {
+public enum TreatmentPlanStatus {
   ACTIVE, COMPLETED
 }

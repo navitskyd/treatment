@@ -12,6 +12,7 @@ import lombok.Setter;
 public class Recurrence {
 
   private List<Occurrence> occurrences;
+
   @Override
   public String toString() {
     return "Recurrence{" + "occurrences=" + occurrences + '}';
