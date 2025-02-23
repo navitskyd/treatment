@@ -1,3 +1,5 @@
+server:
+  port: 1881
 spring:
   datasource:
     url: jdbc:h2:file:./data/demo-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
